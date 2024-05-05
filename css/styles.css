@@ -1,0 +1,349 @@
+body {
+    background: rgb(68, 63, 124);
+    background: radial-gradient(circle, rgba(68, 63, 124, 1) 0%, rgba(18, 15, 57, 1) 100%);
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    color: white;
+    font-family: 'Trebuchet MS', sans-serif;
+}
+
+.main-container {
+    display: grid;
+    grid-template-columns: 1fr 2.5fr 1fr;
+    grid-template-rows: auto 1fr;
+    height: 100vh;
+}
+
+/*---------------------------  Header  -----------------------------*/
+
+.header {
+    grid-column: 1 / span 3;
+    /* border: 1px white solid; */
+}
+
+h1 {
+    margin-top: 50px;
+    text-align: center;
+    font-size: 50px;
+    margin-bottom: 0;
+}
+
+.lightdarkbutton {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+}
+
+/*---------------------------  Columns  -----------------------------*/
+
+.columns {
+    text-align: center;
+    /* border: 1px white solid; */
+}
+
+.column1 {}
+
+.column2 {}
+
+.column3 {}
+
+/*---------------------------  Popout Rules  -----------------------------*/
+
+.popup-container {
+    margin-top: 25px;
+    position: absolute;
+    left: -240px;
+    width: 260px;
+    height: 400px;
+    background-color: grey;
+    transition: left 0.3s cubic-bezier(0.8, 0, 0.6, 1);
+    border-top-right-radius: 5%;
+    border-bottom-right-radius: 5%;
+}
+
+.popup-container:hover {
+    left: 0px;
+}
+
+.pullout-div {
+    position: absolute;
+    background-color: grey;
+    top: 35%;
+    width: 50px;
+    height: 100px;
+    left: 245px;
+    border-radius: 10%;
+}
+
+.container2 {
+    text-align: center;
+    margin: 30px;
+}
+
+.popuph1 {
+    font-size: 20px;
+}
+
+.popup-p {
+    font-size: 20px;
+}
+
+/*---------------------------  Slot Machine  -----------------------------*/
+
+.slot-machine {
+    width: 100%;
+    height: 400px;
+    background-color: rgb(95, 94, 94);
+    border-radius: 20px;
+    margin-top: 25px;
+    position: relative;
+}
+
+.bolt {
+    height: 40px;
+    width: 40px;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+}
+
+.bolt1 {
+    top: 1px;
+    left: 1px;
+}
+
+.bolt2 {
+    bottom: 1px;
+    left: 1px;
+}
+
+.bolt3 {
+    bottom: 1px;
+    right: 1px;
+}
+
+.bolt4 {
+    top: 1px;
+    right: 1px;
+}
+
+.container {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    top: 10%;
+}
+
+.slot-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 15vw;
+    height: 40vh;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    margin: 10px;
+    -webkit-box-shadow: 0px 7px 21px -2px #000000;
+    box-shadow: 0px 7px 21px -2px #000000;
+}
+
+.slot-symbol {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+    background-color: white;
+    -webkit-box-shadow: inset 0px 0px 40px -10px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: inset 0px 0px 40px -10px rgba(0, 0, 0, 0.75);
+    box-shadow: inset 0px 0px 40px -10px rgba(0, 0, 0, 0.75);
+}
+
+/*---------------------------  Ui / Buttons  -----------------------------*/
+
+.ui {
+    margin-top: 30px;
+    ;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+.wager-choice-container {
+    background-color: grey;
+    height: 160px;
+    width: 35%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    border-radius: 10px;
+}
+
+.button {
+    margin: 5px;
+    border-radius: 10px;
+    border-style: none;
+}
+
+.button1 {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.button2 {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+.button3 {
+    grid-column: 1;
+    grid-row: 3;
+}
+
+.button4 {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.button5 {
+    grid-column: 2;
+    grid-row: 2;
+}
+
+.button6 {
+    grid-column: 2;
+    grid-row: 3;
+}
+
+.confirm-button-container {
+    margin-left: 20px;
+    margin-right: 20px;
+    width: 30%;
+}
+
+.confirm-button {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border-style: none;
+}
+
+.coin-slot {
+    background-color: black;
+    width: 5%;
+    height: 150px;
+    border-radius: 10px;
+    position: relative;
+}
+
+.coin-slit {
+    background-color: grey;
+    position: absolute;
+    width: 5px;
+    height: 50px;
+    top: 50px;
+    left: 47.9%;
+    border-radius: 10%;
+}
+
+/*---------------------------  Lever  -----------------------------*/
+
+.lever {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+
+}
+
+.ball {
+    position: absolute;
+    height: 100px;
+    width: 100px;
+    background-color: red;
+    border-radius: 50%;
+    top: 75px;
+    left: 50.7%;
+    box-shadow: -5px -5px 15px #000000 inset, 5px 2px 15px #faa0a0 inset;
+}
+
+.stick {
+    position: absolute;
+    height: 150px;
+    width: 20px;
+    background-color: grey;
+    top: 160px;
+    left: 50.8%;
+    border-radius: 20px;
+    rotate: 20deg;
+    box-shadow: -10px 0px 15px #000000 inset,
+        inset -5px -5px 10px rgba(0, 0, 0, 0.1);
+    border-right: 1px solid black;
+}
+
+.base {
+    position: absolute;
+    height: 100px;
+    width: 100px;
+    background-color: black;
+    border-radius: 20%;
+    top: 250px;
+    right: 37%;
+    box-shadow: -5px 5px 0px grey, -6px 4px 0px grey, -5px 1px 0px grey,
+        -1px 4px 0px grey, 10px 2px 30px #000000, 2px 0px 5px white inset;
+}
+
+/* Pulled lever */
+
+.pulledlever {
+    display: none;
+}
+
+.base2 {
+    position: absolute;
+    height: 100px;
+    width: 100px;
+    background-color: black;
+    border-radius: 20%;
+    top: 250px;
+    box-shadow: -5px 5px 0px grey, -6px 4px 0px grey, -5px 1px 0px grey,
+        -1px 4px 0px grey, 10px 2px 30px #000000, 2px 0px 5px white inset;
+}
+
+.stick2 {
+    display: block;
+    position: absolute;
+    height: 150px;
+    width: 20px;
+    background-color: grey;
+    top: 255px;
+    left: 52.5%;
+    border-radius: 20px;
+    rotate: 120deg;
+    box-shadow: -10px 0px 15px #000000 inset, inset -5px -5px 10px;
+}
+
+.ball2 {
+    position: absolute;
+    height: 100px;
+    width: 100px;
+    background-color: red;
+    border-radius: 50%;
+    top: 330px;
+    left: 55%;
+    box-shadow: -5px -5px 15px #000000 inset, 5px 2px 15px #faa0a0 inset;
+}
+
+
+/*---------------------------  Animations / Etc.  -----------------------------*/
