@@ -17,74 +17,79 @@
             <h1>JavaSpin!</h1>
 
             <div class="lightdarkmode">
-                <button class="lightdarkbutton">Light mode</button>
+                <button class="lightdarkbutton">Dark mode</button>
             </div>
 
         </div>
 
         <div class="column1 columns">
-                <div class="popup-container">
-                    <div class="pullout-div"></div>
-                    <div class="container2">
+            <div class="popup-container">
+                <div class="pullout-div"></div>
+                <div class="container2">
                     <h1 class="popuph1"> RULES AND STUFF <h1>
-                    <p class="popup-p">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vitae blandit velit.
-                    </p>
-                    </div>
-                  </div>
+                            <p class="popup-p">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vitae
+                                blandit velit.
+                            </p>
+                </div>
+            </div>
         </div>
 
         <div class="column2 columns">
-
-            <div class="slot-machine">
-                <img src="Images/bolt.png" class="bolt1 bolt">
-                <img src="Images/bolt.png" class="bolt2 bolt">
-                <img src="Images/bolt.png" class="bolt3 bolt">
-                <img src="Images/bolt.png" class="bolt4 bolt">
-                <div class="container">
-                    <div class="slot-container">
-                        <div id="slot-symbol" class="slot-symbol">?</div>
+            <div class="">
+                <div class="slot-machine">
+                    <img src="Images/bolt.png" class="bolt1 bolt">
+                    <img src="Images/bolt.png" class="bolt2 bolt">
+                    <img src="Images/bolt.png" class="bolt3 bolt">
+                    <img src="Images/bolt.png" class="bolt4 bolt">
+                    <div class="container">
+                        <div class="slot-container">
+                            <div id="slot-symbol" class="slot-symbol">?</div>
+                        </div>
+                        <div class="slot-container">
+                            <div id="slot-symbol" class="slot-symbol">?</div>
+                        </div>
+                        <div class="slot-container">
+                            <div id="slot-symbol" class="slot-symbol">?</div>
+                        </div>
                     </div>
-                    <div class="slot-container">
-                        <div id="slot-symbol" class="slot-symbol">?</div>
-                    </div>
-                    <div class="slot-container">
-                        <div id="slot-symbol" class="slot-symbol">?</div>
+                    <div class="money-container">
+                        <p id="money-display" class="money-display">0$</p>
                     </div>
                 </div>
             </div>
 
             <div class="ui">
                 <div class="wager-choice-container">
-                    <button class="button1 button">5$</button>
-                    <button class="button2 button">15$</button>
-                    <button class="button3 button">25$</button>
-                    <button class="button4 button">10$</button>
-                    <button class="button5 button">20$</button>
-                    <button class="button6 button">100$ </button>
+                    <button id="5DollarButton" class="button1 button">$5</button>
+                    <button id="15DollarButton" class="button2 button">$15</button>
+                    <button id="25DollarButton" class="button3 button">$25</button>
+                    <button id="10DollarButton" class="button4 button">$10</button>
+                    <button id="20DollarButton" class="button5 button">$20</button>
+                    <button id="100DollarButton" class="button6 button">$100 </button>
                 </div>
                 <div class="confirm-button-container">
-                    <button class="confirm-button">Confirm</button>
+                    <button id="confirm-button" class="confirm-button">Confirm</button>
                 </div>
-                <div class="coin-slot">
+                <button id="coin-slot" class="coin-slot">
                     <div class="coin-slit"></div>
-                </div>
+                </button>
             </div>
 
         </div>
 
         <div class="column3 columns">
-
-            <div id="lever" class="lever">
-                <div class="base"></div>
-                <div class="stick"></div>
-                <div class="ball"></div>
+            <div id="lever-container" class="lever-container">
+                <div id="lever" class="lever">
+                    <div class="base"></div>
+                    <div class="stick"></div>
+                    <div class="ball"></div>
+                </div>
+                <div id="pulledlever" class="lever pulledlever">
+                    <div class="base base2"></div>
+                    <div class="stick stick2"></div>
+                    <div class="ball ball2"></div>
+                </div>
             </div>
-            <div id="pulledlever" class="lever pulledlever">
-                <div class="base base2"></div>
-                <div class="stick stick2"></div>
-                <div class="ball ball2"></div>
-            </div>
-
         </div>
 
     </div>
