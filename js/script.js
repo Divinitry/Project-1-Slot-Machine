@@ -87,38 +87,52 @@ slotButton.addEventListener("click", function(){
 })
 
 
-/* 
+/*
 
-update document.get for when u make the lever and make each slot display different fruits when it spins, just + 1 index and change the emojis
+document.getElementById("button").addEventListener("click", spin);   change the button to the lever onclick thing
 
-const arr = ["🍒", "🍇", "🍉", "☀️", "👽", "🕹️"];
-const symbolsGet = document.querySelectorAll('.slot-symbol');
+const columnArrays = [
+  ["🍒", "🍇", "🍉", "☀️", "👽", "🕹️"],
+  ["🍇", "🍒", "☀️", "🍉", "🕹️", "👽"],
+  ["☀️", "🍇", "👽", "🍒", "🕹️", "🍉"]
+];
 
-document.getElementById("button").addEventListener("click", spin);
+const columns = [
+  [
+    document.getElementById("slot-column-one1"),
+    document.getElementById("slot-column-one2"),
+    document.getElementById("slot-column-one3")
+  ],
+  [
+    document.getElementById("slot-column-two1"),
+    document.getElementById("slot-column-two2"),
+    document.getElementById("slot-column-two3")
+  ],
+  [
+    document.getElementById("slot-column-three1"),
+    document.getElementById("slot-column-three2"),
+    document.getElementById("slot-column-three3")
+  ]
+];
+
+const timeouts = [2000, 3000, 4000];
 
 function spin() {
-  symbolsGet.forEach((symbolGet) => {
-    let currentIndex = 0;
-    const randomIndex = Math.floor(Math.random() * arr.length);
-    const randomEmoji = arr[randomIndex];
-
-    
+  columns.forEach((column, index) => {
     const interval = setInterval(() => {
-      symbolGet.innerText = arr[currentIndex];
-      currentIndex++;
-      if (currentIndex === arr.length) {
-        currentIndex = 0;
-      }
+      const currentIndex = Math.floor(Math.random() * columnArrays[index].length);
+      column[1].innerText = columnArrays[index][currentIndex]; 
+      column[0].innerText = columnArrays[index][(currentIndex - 1 + columnArrays[index].length) % columnArrays[index].length]; 
+      column[2].innerText = columnArrays[index][(currentIndex + 1) % columnArrays[index].length]; 
     }, 100);
 
     setTimeout(() => {
       clearInterval(interval);
-      symbolGet.innerText = randomEmoji;
-    }, 3000);
+      const currentIndex = Math.floor(Math.random() * columnArrays[index].length);
+      column[1].innerText = columnArrays[index][currentIndex];
+      column[0].innerText = columnArrays[index][(currentIndex - 1 + columnArrays[index].length) % columnArrays[index].length];
+      column[2].innerText = columnArrays[index][(currentIndex + 1) % columnArrays[index].length];
+    }, timeouts[index]);
   });
-} 
-
-
+}
 */
-
-// three seperate functions - CAROUSEL FOR THE ITEMS
