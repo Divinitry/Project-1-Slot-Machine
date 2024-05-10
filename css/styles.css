@@ -39,19 +39,18 @@ h1 {
 
 /*---------------------------  Columns  -----------------------------*/
 
-.columns {
+.grid-columns {
     text-align: center;
-    /* border: 1px white solid; */
 }
 
-.column1 {}
+.grid-column1 {}
 
-.column2 {
+.grid-column2 {
     height: 100%;
     width: 100%;
 }
 
-.column3 {}
+.grid-column3 {}
 
 /*---------------------------  Popout Rules  -----------------------------*/
 
@@ -98,6 +97,7 @@ h1 {
 
 .slot-machine {
     display: flex;
+    flex-direction: column;
     position: relative;
     width: 100%;
     height: 55vh;
@@ -115,14 +115,14 @@ h1 {
     border: 5px black solid;
     background-color: black;
     border-radius: 55px;
-  }
-  
-  .column{
+}
+
+.column {
     display: flex;
     flex-direction: column;
-  }
-  
-  .slot-container {
+}
+
+.slot-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -130,9 +130,9 @@ h1 {
     height: 100px;
     overflow: hidden;
     position: relative;
-  }
-  
-  .slot-symbol {
+}
+
+.slot-symbol {
     position: absolute;
     top: 0;
     left: 0;
@@ -150,24 +150,24 @@ h1 {
     box-shadow: inset 0px 0px 40px -20px rgba(0, 0, 0, 1);
     border-left: 2px solid black;
     width: calc(100% - 4px);
-  }
-  
-  .top-symbols-left{
+}
+
+.top-symbols-left {
     border-radius: 50% 0% 0% 0%;
-  }
-  
-  .top-symbols-right{
+}
+
+.top-symbols-right {
     border-radius: 0% 50% 0% 0%;
-  }
-  
-  .bottom-symbols-left{
+}
+
+.bottom-symbols-left {
     border-radius: 0% 0% 0% 50%;
-  }
-  
-  .bottom-symbols-right{
+}
+
+.bottom-symbols-right {
     border-radius: 0% 0% 50% 0%;
-  }
-  
+}
+
 
 .bolt {
     height: 40px;
@@ -199,21 +199,18 @@ h1 {
 
 /*---------------------------  Money display  -----------------------------*/
 
-.money-container{
+.money-container {
     display: flex;
     background-color: black;
     height: 15%;
     width: 20%;
     border-radius: 5%;
-    margin-left: 40%;
     justify-content: center;
     align-items: center;
     position: relative;
-    top: -18px;
 }
 
-.money-display{
-}
+.money-display {}
 
 /*---------------------------  Ui / Buttons  -----------------------------*/
 
@@ -305,11 +302,13 @@ h1 {
 
 /*---------------------------  Lever  -----------------------------*/
 
+
 .lever {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
 
 .ball {
