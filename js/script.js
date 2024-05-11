@@ -1,5 +1,5 @@
 // Global variables
-let currentMoney = 100;
+let currentMoney = 50;
 let betAmount = 0;
 
 const betOneButton = document.getElementById("betOneButton");
@@ -34,7 +34,7 @@ function afterSpin() {
     betAmount = 0
 }
 function gameLost() {
-    if (currentMoney < 1){
+    if (currentMoney < 1) {
         // Have an alert here that tells the player they lost
         setTimeout(() => {
             location.reload()
@@ -42,7 +42,7 @@ function gameLost() {
     }
 }
 function gameWon() {
-    if (currentMoney === 1500){
+    if (currentMoney >= 500) {
         // have an alert to tell the player they won with animations
         // Maybe have a prompt asking if they want to continue and see if they can get as much money as possible
         /* if (playerChoice = no){
@@ -63,15 +63,15 @@ function updateButtons() {
     }
 }
 function updateMoneyDisplay() {
-    moneyDisplay.innerText = `$${currentMoney}`;
+    moneyDisplay.innerText = `${currentMoney}`;
 }
 function updateBetAmount(amount) {
-    if(betAmount + amount <= currentMoney){
+    if (betAmount + amount <= currentMoney) {
         betAmount += amount;
         betDisplay.innerText = betAmount;
         updateButtons();
-    }else if(betAmount += amount > currentMoney){
-        alert("not enough money")
+    } else if (betAmount += amount > currentMoney) {
+        // make nice alert to tell them not enough!
     }
 }
 
@@ -96,134 +96,144 @@ confirmButton.addEventListener("click", function () {
     }
 });
 
-slotButton.addEventListener("click", function(){
+slotButton.addEventListener("click", function () {
     lever.style.pointerEvents = "auto";
 })
 
-lever.addEventListener("click", function(){
+lever.addEventListener("click", function () {
     document.getElementById("lever").style.display = "none";
     document.getElementById("pulledlever").style.display = "flex";
-    
+
     setInterval(() => {
-    document.getElementById("lever").style.display = "flex";
-    document.getElementById("pulledlever").style.display = "none";
+        document.getElementById("lever").style.display = "flex";
+        document.getElementById("pulledlever").style.display = "none";
     }, 300)
 
     setTimeout(() => {
         lever.style.pointerEvents = "none";
-    },1000)
-   })
+    }, 1000)
+})
 
 // --------------------------- Logic for slot spin ---------------------------
 
-document.getElementById("lever").addEventListener("click", spin); 
+document.getElementById("lever").addEventListener("click", spin);
 
 const columnArrays = [
-  ["🍒", "🍇", "🍉", "💎", "🍎", "🌶️"],
-  ["🍇", "🍒", "💎", "🍉", "🌶️", "🍎"],
-  ["💎", "🍇", "🍎", "🍒", "🌶️", "🍉"]
+    // ["🍒", "🍇", "🍉", "💎", "🍎", "🌶️"],
+    // ["🍇", "🍒", "💎", "🍉", "🌶️", "🍎"],
+    // ["💎", "🍇", "🍎", "🍒", "🌶️", "🍉"]
 
-//        To test jackpot 
-// ["💎","💎","💎","💎","💎","💎"],
-// ["💎","💎","💎","💎","💎","💎"],
-// ["💎","💎","💎","💎","💎","💎"]
+    ["🍉", "🍎", "🍇", "🍒", "💎", "🌶️"],
+    ["🌶️", "🍒", "🍇", "💎", "🍎", "🍉"],
+    ["🍎", "🍇", "🍒", "💎", "🍉", "🌶️"]
 
-// ["🍒","🍒","🍒","🍒","🍒","🍒"],
-// ["🍒","🍒","🍒","🍒","🍒","🍒"],
-// ["🍒","🍒","🍒","🍒","🍒","🍒"]
+    //        To test jackpot 
+    // ["💎","💎","💎","💎","💎","💎"],
+    // ["💎","💎","💎","💎","💎","💎"],
+    // ["💎","💎","💎","💎","💎","💎"]
+
+    // ["🍒","🍒","🍒","🍒","🍒","🍒"],
+    // ["🍒","🍒","🍒","🍒","🍒","🍒"],
+    // ["🍒","🍒","🍒","🍒","🍒","🍒"]
 ];
 
 const multipliers = {
-    "🍒" : 1,
-    "🍇" : 1.5,
-    "🍉" : 2,
-    "💎" : 5,
-    "🍎" : 2.5,
-    "🌶️" : 3,
+    "🍒": 1,
+    "🍇": 1.5,
+    "🍉": 2,
+    "💎": 5,
+    "🍎": 2.5,
+    "🌶️": 3,
 }
 
 const columns = [
-  [
-    document.getElementById("slot-column-one1"),
-    document.getElementById("slot-column-one2"),
-    document.getElementById("slot-column-one3")
-  ],
-  [
-    document.getElementById("slot-column-two1"),
-    document.getElementById("slot-column-two2"),
-    document.getElementById("slot-column-two3")
-  ],
-  [
-    document.getElementById("slot-column-three1"),
-    document.getElementById("slot-column-three2"),
-    document.getElementById("slot-column-three3")
-  ]
+    [
+        document.getElementById("slot-column-one1"),
+        document.getElementById("slot-column-one2"),
+        document.getElementById("slot-column-one3")
+    ],
+    [
+        document.getElementById("slot-column-two1"),
+        document.getElementById("slot-column-two2"),
+        document.getElementById("slot-column-two3")
+    ],
+    [
+        document.getElementById("slot-column-three1"),
+        document.getElementById("slot-column-three2"),
+        document.getElementById("slot-column-three3")
+    ]
 ];
 
 const timeouts = [2000, 3000, 4000];
 
 function spin() {
     results = ['', '', '']
-  columns.forEach((column, index) => {
-    const interval = setInterval(() => {
-      const currentIndex = Math.floor(Math.random() * columnArrays[index].length);
-      column[1].innerText = columnArrays[index][currentIndex]; 
-      column[0].innerText = columnArrays[index][(currentIndex - 1 + columnArrays[index].length) % columnArrays[index].length]; 
-      column[2].innerText = columnArrays[index][(currentIndex + 1) % columnArrays[index].length]; 
-    }, 100);
+    columns.forEach((column, index) => {
+        const interval = setInterval(() => {
+            const currentIndex = Math.floor(Math.random() * columnArrays[index].length);
+            column[0].classList.add('move-down');
+            column[1].classList.add('move-down');
+            column[2].classList.add('move-down');
+            column[1].innerText = columnArrays[index][currentIndex];
+            column[0].innerText = columnArrays[index][(currentIndex - 1 + columnArrays[index].length) % columnArrays[index].length];
+            column[2].innerText = columnArrays[index][(currentIndex + 1) % columnArrays[index].length];
+        }, 100);
+
+        setTimeout(() => {
+            clearInterval(interval);
+            const currentIndex = Math.floor(Math.random() * columnArrays[index].length);
+            column[0].classList.remove('move-down');
+            column[1].classList.remove('move-down');
+            column[2].classList.remove('move-down');          
+            column[1].innerText = columnArrays[index][currentIndex];
+            results[index] = columnArrays[index][currentIndex];
+            column[0].innerText = columnArrays[index][(currentIndex - 1 + columnArrays[index].length) % columnArrays[index].length];
+            column[2].innerText = columnArrays[index][(currentIndex + 1) % columnArrays[index].length];
+        }, timeouts[index]);
+    });
+    // --------------------------- Logic for money loss and gain for spin ---------------------------
+    setTimeout(() => {
+        let multiplierValue;
+        let matchedEmoji;
+
+        const handleMatchingResults = (emojiIndex) => {
+            matchedEmoji = results[emojiIndex];
+            multiplierValue = multipliers[matchedEmoji];
+            currentMoney += betAmount * multiplierValue;
+            moneyDisplay.innerText = `$${currentMoney}`;
+        };
+
+        if (results[0] === results[1] && results[0] === results[2]) {
+            if (results[0] === "💎") {
+                matchedEmoji = results[0];
+                multiplierValue = multipliers[matchedEmoji];
+                currentMoney += (betAmount * multiplierValue) * 4;
+                moneyDisplay.innerText = `$${currentMoney}`;
+            } else {
+                matchedEmoji = results[0];
+                multiplierValue = multipliers[matchedEmoji];
+                currentMoney += (betAmount * multiplierValue) * 2;
+                moneyDisplay.innerText = `$${currentMoney}`;
+            }
+        } else if (results[0] === results[1]) {
+            handleMatchingResults(0);
+        } else if (results[0] === results[2]) {
+            handleMatchingResults(0);
+        } else if (results[1] === results[2]) {
+            handleMatchingResults(1);
+        }
+
+        if (matchedEmoji) {
+            multiplierValue = multipliers[matchedEmoji];
+            console.log(`Multiplier value for ${matchedEmoji} is: ${multiplierValue}`);
+        } else {
+            console.log("No matching emoji found in the results.");
+        }
+        gameLost()
+        gameWon()
+    }, 4000);
 
     setTimeout(() => {
-      clearInterval(interval);
-      const currentIndex = Math.floor(Math.random() * columnArrays[index].length);
-      column[1].innerText = columnArrays[index][currentIndex];
-      results[index] = columnArrays[index][currentIndex];
-      column[0].innerText = columnArrays[index][(currentIndex - 1 + columnArrays[index].length) % columnArrays[index].length];
-      column[2].innerText = columnArrays[index][(currentIndex + 1) % columnArrays[index].length];
-    }, timeouts[index]);
-  });
-  // --------------------------- Logic for money loss and gain for spin ---------------------------
-  setTimeout(() => {
-    let multiplierValue;
-    let matchedEmoji;
-
-    const handleMatchingResults = (emojiIndex) => {
-        matchedEmoji = results[emojiIndex];
-        multiplierValue = multipliers[matchedEmoji];
-        currentMoney += betAmount * multiplierValue;
-        moneyDisplay.innerText = `$${currentMoney}`;
-    };
-
-    if (results[0] === results[1] && results[0] === results[2]) {
-        if(results[0] === "💎"){
-            matchedEmoji = results[0];
-            multiplierValue = multipliers[matchedEmoji];
-            currentMoney += (betAmount * multiplierValue) * 4;
-            moneyDisplay.innerText = `$${currentMoney}`;
-        }else {
-            matchedEmoji = results[0];
-            multiplierValue = multipliers[matchedEmoji];
-            currentMoney += (betAmount * multiplierValue) * 2;
-            moneyDisplay.innerText = `$${currentMoney}`;
-        }
-    } else if (results[0] === results[1]) {
-        handleMatchingResults(0);
-    } else if (results[0] === results[2]) {
-        handleMatchingResults(0);
-    } else if (results[1] === results[2]) {
-        handleMatchingResults(1);
-    }
-
-    if (matchedEmoji) {
-        multiplierValue = multipliers[matchedEmoji];
-        console.log(`Multiplier value for ${matchedEmoji} is: ${multiplierValue}`);
-    } else {
-        console.log("No matching emoji found in the results.");
-    }
-    gameLost()
-    gameWon()
-}, 4000);
-
-setTimeout(() =>{
-    afterSpin()
-}, 5000)
+        afterSpin()
+    }, 5000)
 }
