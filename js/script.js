@@ -2,42 +2,37 @@
 let currentMoney = 100;
 let betAmount = 0;
 
-const betDisplay = document.getElementById("bet-display");
-betDisplay.innerText = `${betAmount}`;
-
-const moneyDisplay = document.getElementById("money-display");
-moneyDisplay.innerText = `${currentMoney}`;
-
-const confirmButton = document.getElementById("confirm-button");
-confirmButton.disabled = true;
-
-const slotButton = document.getElementById("coin-slot");
-slotButton.disabled = true;
-
-const lever = document.getElementById("lever");
-lever.style.pointerEvents = "none";
-
 const betOneButton = document.getElementById("betOneButton");
 const betTwoButton = document.getElementById("betTwoButton");
 const betThreeButton = document.getElementById("betThreeButton");
+
+const betDisplay = document.getElementById("bet-display");
+betDisplay.innerText = `${betAmount}`;
+const moneyDisplay = document.getElementById("money-display");
+moneyDisplay.innerText = `${currentMoney}`;
+const confirmButton = document.getElementById("confirm-button");
+confirmButton.disabled = true;
+const slotButton = document.getElementById("coin-slot");
+slotButton.disabled = true;
+const lever = document.getElementById("lever");
+lever.style.pointerEvents = "none";
+
+
 
 function pauseButtons() {
     betOneButton.disabled = true;
     betTwoButton.disabled = true;
     betThreeButton.disabled = true;
 }
-
 function resumeButtons() {
     betOneButton.disabled = false;
     betTwoButton.disabled = false;
     betThreeButton.disabled = false;
 }
-
 function afterSpin() {
     resumeButtons();
     betAmount = 0
 }
-
 function gameLost() {
     if (currentMoney < 1){
         // Have an alert here that tells the player they lost
@@ -46,7 +41,6 @@ function gameLost() {
         }, 3000)
     }
 }
-
 function gameWon() {
     if (currentMoney === 1500){
         // have an alert to tell the player they won with animations
@@ -61,7 +55,6 @@ function gameWon() {
         */
     }
 }
-
 function updateButtons() {
     if (currentMoney >= betAmount) {
         confirmButton.disabled = false;
@@ -69,14 +62,17 @@ function updateButtons() {
         confirmButton.disabled = true;
     }
 }
-
 function updateMoneyDisplay() {
     moneyDisplay.innerText = `$${currentMoney}`;
 }
-
 function updateBetAmount(amount) {
-    betAmount += amount;
-    updateButtons();
+    if(betAmount + amount <= currentMoney){
+        betAmount += amount;
+        betDisplay.innerText = betAmount;
+        updateButtons();
+    }else if(betAmount += amount > currentMoney){
+        alert("not enough money")
+    }
 }
 
 betOneButton.addEventListener("click", function () {
@@ -96,6 +92,7 @@ confirmButton.addEventListener("click", function () {
         slotButton.disabled = false;
         confirmButton.disabled = true;
         pauseButtons();
+        betDisplay.innerText = 0;
     }
 });
 
@@ -122,23 +119,27 @@ lever.addEventListener("click", function(){
 document.getElementById("lever").addEventListener("click", spin); 
 
 const columnArrays = [
-  ["🍒", "🍇", "🍉", "☀️", "👽", "🕹️"],
-  ["🍇", "🍒", "☀️", "🍉", "🕹️", "👽"],
-  ["☀️", "🍇", "👽", "🍒", "🕹️", "🍉"]
+  ["🍒", "🍇", "🍉", "💎", "🍎", "🌶️"],
+  ["🍇", "🍒", "💎", "🍉", "🌶️", "🍎"],
+  ["💎", "🍇", "🍎", "🍒", "🌶️", "🍉"]
 
 //        To test jackpot 
-//   ["☀️","☀️","☀️","☀️","☀️","☀️"],
-//   ["☀️","☀️","☀️","☀️","☀️","☀️"],
-//   ["☀️","☀️","☀️","☀️","☀️","☀️"]
+// ["💎","💎","💎","💎","💎","💎"],
+// ["💎","💎","💎","💎","💎","💎"],
+// ["💎","💎","💎","💎","💎","💎"]
+
+// ["🍒","🍒","🍒","🍒","🍒","🍒"],
+// ["🍒","🍒","🍒","🍒","🍒","🍒"],
+// ["🍒","🍒","🍒","🍒","🍒","🍒"]
 ];
 
 const multipliers = {
     "🍒" : 1,
     "🍇" : 1.5,
     "🍉" : 2,
-    "☀️" : 5,
-    "👽" : 2.5,
-    "🕹️" : 3,
+    "💎" : 5,
+    "🍎" : 2.5,
+    "🌶️" : 3,
 }
 
 const columns = [
@@ -193,12 +194,17 @@ function spin() {
     };
 
     if (results[0] === results[1] && results[0] === results[2]) {
-        matchedEmoji = results[0];
-        multiplierValue = multipliers[matchedEmoji];
-        currentMoney += (betAmount * multiplierValue) * 4;
-        moneyDisplay.innerText = `$${currentMoney}`;
-        gameLost()
-        gameWon()
+        if(results[0] === "💎"){
+            matchedEmoji = results[0];
+            multiplierValue = multipliers[matchedEmoji];
+            currentMoney += (betAmount * multiplierValue) * 4;
+            moneyDisplay.innerText = `$${currentMoney}`;
+        }else {
+            matchedEmoji = results[0];
+            multiplierValue = multipliers[matchedEmoji];
+            currentMoney += (betAmount * multiplierValue) * 2;
+            moneyDisplay.innerText = `$${currentMoney}`;
+        }
     } else if (results[0] === results[1]) {
         handleMatchingResults(0);
     } else if (results[0] === results[2]) {
@@ -213,6 +219,8 @@ function spin() {
     } else {
         console.log("No matching emoji found in the results.");
     }
+    gameLost()
+    gameWon()
 }, 4000);
 
 setTimeout(() =>{
