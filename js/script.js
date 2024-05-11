@@ -1,84 +1,107 @@
 // Global variables
 let currentMoney = 100;
-let wager5 = 5;
-let wager10 = 10;
-let wager15 = 15;
-let wager20 = 20;
-let wager25 = 25;
-let wager30 = 30;
+let betAmount = 0;
+
+const betDisplay = document.getElementById("bet-display");
+betDisplay.innerText = `${betAmount}`;
 
 const moneyDisplay = document.getElementById("money-display");
-moneyDisplay.innerText = `$${currentMoney}`;
+moneyDisplay.innerText = `${currentMoney}`;
 
 const confirmButton = document.getElementById("confirm-button");
 confirmButton.disabled = true;
 
-const slotButton = document.getElementById("coin-slot")
+const slotButton = document.getElementById("coin-slot");
 slotButton.disabled = true;
 
-const lever = document.getElementById("lever")
+const lever = document.getElementById("lever");
 lever.style.pointerEvents = "none";
 
-const fiveButton = document.getElementById("5DollarButton");
-const tenButton = document.getElementById("10DollarButton");
-const fifteenButton = document.getElementById("15DollarButton");
-const twentyButton = document.getElementById("20DollarButton");
-const twentyFiveButton = document.getElementById("25DollarButton");
-const thirtyButton = document.getElementById("30DollarButton");
+const betOneButton = document.getElementById("betOneButton");
+const betTwoButton = document.getElementById("betTwoButton");
+const betThreeButton = document.getElementById("betThreeButton");
 
-function pauseButtons(){
-    fiveButton.disabled = true;
-    tenButton.disabled = true;
-    fifteenButton.disabled = true;
-    twentyButton.disabled = true;
-    twentyFiveButton.disabled = true;
-    thirtyButton.disabled = true;
+function pauseButtons() {
+    betOneButton.disabled = true;
+    betTwoButton.disabled = true;
+    betThreeButton.disabled = true;
 }
 
-// --------------------------- Logic for picking money and enabling/disabling buttons ---------------------------
+function resumeButtons() {
+    betOneButton.disabled = false;
+    betTwoButton.disabled = false;
+    betThreeButton.disabled = false;
+}
 
-fiveButton.addEventListener("click", function () {
-    buttonHandler(wager5);
-});
-tenButton.addEventListener("click", function () {
-    buttonHandler(wager10);
-});
-fifteenButton.addEventListener("click", function () {
-    buttonHandler(wager15);
-});
-twentyButton.addEventListener("click", function () {
-    buttonHandler(wager20);
-});
-twentyFiveButton.addEventListener("click", function () {
-    buttonHandler(wager25);
-});
-thirtyButton.addEventListener("click", function () {
-    buttonHandler(wager30);
-});
+function afterSpin() {
+    resumeButtons();
+    betAmount = 0
+}
 
-let selectedWager;
-let confirmedWager;
-
-function buttonHandler(wager) {
-    selectedWager = wager;
-    if (currentMoney >= selectedWager) {
-        confirmButton.disabled = false;
-    } else {
-        alert(`Not enough money to wager $${selectedWager} dollars, you currently have $${currentMoney}`);
-        // CHANGE THIS TO AN ACTUAL NICE LOOKING ALERT! ^
+function gameLost() {
+    if (currentMoney < 1){
+        // Have an alert here that tells the player they lost
+        setTimeout(() => {
+            location.reload()
+        }, 3000)
     }
 }
 
-confirmButton.addEventListener("click", function(){
-    if (selectedWager !== undefined) {
-        currentMoney -= selectedWager;
-        moneyDisplay.innerText = `$${currentMoney}`;
+function gameWon() {
+    if (currentMoney === 1500){
+        // have an alert to tell the player they won with animations
+        // Maybe have a prompt asking if they want to continue and see if they can get as much money as possible
+        /* if (playerChoice = no){
+            setTimout(() => {
+                location.Reload
+            }2000)
+        } else{
+            alert "good luck"
+        }
+        */
+    }
+}
+
+function updateButtons() {
+    if (currentMoney >= betAmount) {
+        confirmButton.disabled = false;
+    } else {
+        confirmButton.disabled = true;
+    }
+}
+
+function updateMoneyDisplay() {
+    moneyDisplay.innerText = `$${currentMoney}`;
+}
+
+function updateBetAmount(amount) {
+    betAmount += amount;
+    updateButtons();
+}
+
+betOneButton.addEventListener("click", function () {
+    updateBetAmount(1);
+});
+betTwoButton.addEventListener("click", function () {
+    updateBetAmount(2);
+});
+betThreeButton.addEventListener("click", function () {
+    updateBetAmount(3);
+});
+
+confirmButton.addEventListener("click", function () {
+    if (betAmount > 0) {
+        currentMoney -= betAmount;
+        updateMoneyDisplay();
         slotButton.disabled = false;
         confirmButton.disabled = true;
         pauseButtons();
-        confirmedWager = selectedWager;
-    } 
+    }
 });
+
+slotButton.addEventListener("click", function(){
+    lever.style.pointerEvents = "auto";
+})
 
 lever.addEventListener("click", function(){
     document.getElementById("lever").style.display = "none";
@@ -88,24 +111,25 @@ lever.addEventListener("click", function(){
     document.getElementById("lever").style.display = "flex";
     document.getElementById("pulledlever").style.display = "none";
     }, 300)
-   })
 
-slotButton.addEventListener("click", function(){
-    lever.style.pointerEvents = "auto";
-})
+    setTimeout(() => {
+        lever.style.pointerEvents = "none";
+    },1000)
+   })
 
 // --------------------------- Logic for slot spin ---------------------------
 
 document.getElementById("lever").addEventListener("click", spin); 
 
 const columnArrays = [
-//   ["🍒", "🍇", "🍉", "☀️", "👽", "🕹️"],
-//   ["🍇", "🍒", "☀️", "🍉", "🕹️", "👽"],
-//   ["☀️", "🍇", "👽", "🍒", "🕹️", "🍉"]
+  ["🍒", "🍇", "🍉", "☀️", "👽", "🕹️"],
+  ["🍇", "🍒", "☀️", "🍉", "🕹️", "👽"],
+  ["☀️", "🍇", "👽", "🍒", "🕹️", "🍉"]
 
-  ["☀️","☀️","☀️","☀️","☀️","☀️"],
-  ["☀️","☀️","☀️","☀️","☀️","☀️"],
-  ["☀️","☀️","☀️","☀️","☀️","☀️"]
+//        To test jackpot 
+//   ["☀️","☀️","☀️","☀️","☀️","☀️"],
+//   ["☀️","☀️","☀️","☀️","☀️","☀️"],
+//   ["☀️","☀️","☀️","☀️","☀️","☀️"]
 ];
 
 const multipliers = {
@@ -160,45 +184,38 @@ function spin() {
   setTimeout(() => {
     let multiplierValue;
     let matchedEmoji;
-    let numMatching = 0;
 
+    const handleMatchingResults = (emojiIndex) => {
+        matchedEmoji = results[emojiIndex];
+        multiplierValue = multipliers[matchedEmoji];
+        currentMoney += betAmount * multiplierValue;
+        moneyDisplay.innerText = `$${currentMoney}`;
+    };
 
     if (results[0] === results[1] && results[0] === results[2]) {
         matchedEmoji = results[0];
-        multiplierValue = multipliers[matchedEmoji]
-        if (results[0] === "☀️"){
-            currentMoney = (currentMoney + confirmedWager * multiplierValue) * 4
-        } else {
-            currentMoney = (currentMoney + confirmedWager * multiplierValue) * 2
-        }
+        multiplierValue = multipliers[matchedEmoji];
+        currentMoney += (betAmount * multiplierValue) * 4;
         moneyDisplay.innerText = `$${currentMoney}`;
+        gameLost()
+        gameWon()
     } else if (results[0] === results[1]) {
-        matchedEmoji = results[0];
-        multiplierValue = multipliers[matchedEmoji]
-        currentMoney = currentMoney + confirmedWager * multiplierValue
-        moneyDisplay.innerText = `$${currentMoney}`;
+        handleMatchingResults(0);
     } else if (results[0] === results[2]) {
-        matchedEmoji = results[0];
-        multiplierValue = multipliers[matchedEmoji]
-        currentMoney = currentMoney + confirmedWager * multiplierValue
-        moneyDisplay.innerText = `$${currentMoney}`;
+        handleMatchingResults(0);
     } else if (results[1] === results[2]) {
-        matchedEmoji = results[1];
-        multiplierValue = multipliers[matchedEmoji]
-        currentMoney = currentMoney + confirmedWager * multiplierValue
-        moneyDisplay.innerText = `$${currentMoney}`;
+        handleMatchingResults(1);
     }
 
     if (matchedEmoji) {
-
         multiplierValue = multipliers[matchedEmoji];
         console.log(`Multiplier value for ${matchedEmoji} is: ${multiplierValue}`);
     } else {
         console.log("No matching emoji found in the results.");
     }
 }, 4000);
+
+setTimeout(() =>{
+    afterSpin()
+}, 5000)
 }
-
-
-
-

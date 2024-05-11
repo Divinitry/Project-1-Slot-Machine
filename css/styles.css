@@ -199,18 +199,28 @@ h1 {
 
 /*---------------------------  Money display  -----------------------------*/
 
-.money-container {
-    display: flex;
-    background-color: black;
-    height: 15%;
-    width: 20%;
-    border-radius: 5%;
-    justify-content: center;
+.money-bet-parent {
+    display: flex; 
+    flex-direction: row; 
+    justify-content: space-around; 
     align-items: center;
-    position: relative;
 }
 
-.money-display {}
+.bet-container,
+.money-container {
+    display: inline-block;
+    background-color: black;
+    height: 100px; 
+    width: 150px; 
+    border-radius: 5px;
+}
+
+.bet-display{
+}
+
+.money-display {
+
+}
 
 /*---------------------------  Ui / Buttons  -----------------------------*/
 
