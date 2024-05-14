@@ -16,9 +16,15 @@ const slotButton = document.getElementById("coin-slot");
 slotButton.disabled = true;
 const lever = document.getElementById("lever");
 lever.style.pointerEvents = "none";
-
-
-
+const customAlert = document.getElementById("alert-p");
+function customAlertOn(text){
+    customAlert.style.display = "block";
+    customAlert.innerText = `${text}`
+    customAlert.style.backgroundColor = rgba(0,0,0,0.4);
+}
+function customAlertOff(){
+    customAlert.style.display = "none";
+}
 function pauseButtons() {
     betOneButton.disabled = true;
     betTwoButton.disabled = true;
@@ -35,7 +41,7 @@ function afterSpin() {
 }
 function gameLost() {
     if (currentMoney < 1) {
-        // Have an alert here that tells the player they lost
+        customAlertOn("You ran out of money, better luck next time!")
         setTimeout(() => {
             location.reload()
         }, 3000)
@@ -43,6 +49,7 @@ function gameLost() {
 }
 function gameWon() {
     if (currentMoney >= 500) {
+
         // have an alert to tell the player they won with animations
         // Maybe have a prompt asking if they want to continue and see if they can get as much money as possible
         /* if (playerChoice = no){
@@ -98,6 +105,7 @@ confirmButton.addEventListener("click", function () {
 
 slotButton.addEventListener("click", function () {
     lever.style.pointerEvents = "auto";
+    slotButton.disabled = true;
 })
 
 lever.addEventListener("click", function () {
@@ -119,10 +127,6 @@ lever.addEventListener("click", function () {
 document.getElementById("lever").addEventListener("click", spin);
 
 const columnArrays = [
-    // ["🍒", "🍇", "🍉", "💎", "🍎", "🌶️"],
-    // ["🍇", "🍒", "💎", "🍉", "🌶️", "🍎"],
-    // ["💎", "🍇", "🍎", "🍒", "🌶️", "🍉"]
-
     ["🍉", "🍎", "🍇", "🍒", "💎", "🌶️"],
     ["🌶️", "🍒", "🍇", "💎", "🍎", "🍉"],
     ["🍎", "🍇", "🍒", "💎", "🍉", "🌶️"]
@@ -131,10 +135,6 @@ const columnArrays = [
     // ["💎","💎","💎","💎","💎","💎"],
     // ["💎","💎","💎","💎","💎","💎"],
     // ["💎","💎","💎","💎","💎","💎"]
-
-    // ["🍒","🍒","🍒","🍒","🍒","🍒"],
-    // ["🍒","🍒","🍒","🍒","🍒","🍒"],
-    // ["🍒","🍒","🍒","🍒","🍒","🍒"]
 ];
 
 const multipliers = {
@@ -171,9 +171,9 @@ function spin() {
     columns.forEach((column, index) => {
         const interval = setInterval(() => {
             const currentIndex = Math.floor(Math.random() * columnArrays[index].length);
-            column[0].classList.add('move-down');
-            column[1].classList.add('move-down');
-            column[2].classList.add('move-down');
+            column[0].classList.add('move-down-top');
+            column[1].classList.add('move-down-middle');
+            column[2].classList.add('move-down-bottom');
             column[1].innerText = columnArrays[index][currentIndex];
             column[0].innerText = columnArrays[index][(currentIndex - 1 + columnArrays[index].length) % columnArrays[index].length];
             column[2].innerText = columnArrays[index][(currentIndex + 1) % columnArrays[index].length];
@@ -182,9 +182,9 @@ function spin() {
         setTimeout(() => {
             clearInterval(interval);
             const currentIndex = Math.floor(Math.random() * columnArrays[index].length);
-            column[0].classList.remove('move-down');
-            column[1].classList.remove('move-down');
-            column[2].classList.remove('move-down');          
+            column[0].classList.remove('move-down-top');
+            column[1].classList.remove('move-down-middle');
+            column[2].classList.remove('move-down-bottom');          
             column[1].innerText = columnArrays[index][currentIndex];
             results[index] = columnArrays[index][currentIndex];
             column[0].innerText = columnArrays[index][(currentIndex - 1 + columnArrays[index].length) % columnArrays[index].length];
@@ -200,7 +200,7 @@ function spin() {
             matchedEmoji = results[emojiIndex];
             multiplierValue = multipliers[matchedEmoji];
             currentMoney += betAmount * multiplierValue;
-            moneyDisplay.innerText = `$${currentMoney}`;
+            moneyDisplay.innerText = `${currentMoney}`;
         };
 
         if (results[0] === results[1] && results[0] === results[2]) {
@@ -208,12 +208,12 @@ function spin() {
                 matchedEmoji = results[0];
                 multiplierValue = multipliers[matchedEmoji];
                 currentMoney += (betAmount * multiplierValue) * 4;
-                moneyDisplay.innerText = `$${currentMoney}`;
+                moneyDisplay.innerText = `${currentMoney}`;
             } else {
                 matchedEmoji = results[0];
                 multiplierValue = multipliers[matchedEmoji];
                 currentMoney += (betAmount * multiplierValue) * 2;
-                moneyDisplay.innerText = `$${currentMoney}`;
+                moneyDisplay.innerText = `${currentMoney}`;
             }
         } else if (results[0] === results[1]) {
             handleMatchingResults(0);
