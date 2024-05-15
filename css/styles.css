@@ -1,6 +1,6 @@
 body {
     background: rgb(255, 51, 51);
-    background: radial-gradient(circle, rgba(255, 51, 51, 1) 0%, rgba(128, 0, 0, 1) 100%);
+    background-image: radial-gradient(circle, rgba(255, 51, 51, 1) 0%, rgba(128, 0, 0, 1) 100%);
     height: 100vh;
     width: 100vw;
     margin: 0;
@@ -8,6 +8,7 @@ body {
     border: 0;
     color: white;
     font-family: 'Trebuchet MS', sans-serif;
+    font-size: 2rem;
 }
 
 .main-container {
@@ -20,21 +21,35 @@ body {
 /*---------------------------  Header  -----------------------------*/
 
 .header {
+    margin-top: 2%;
     grid-column: 1 / span 3;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
     z-index: 1;
+    width: 30%;
 }
 
 .title {
-    margin-top: 20px;
+    background: rgb(5, 72, 149);
+    background: radial-gradient(circle, rgba(5, 72, 149, 1) 0%, rgba(1, 13, 48, 1) 100%);
+    border: 3px black solid;
+    margin-top: 0;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    border-radius: 10px;
     text-align: center;
-    font-size: 5rem;
+    font-size: 5vw;
     margin-bottom: 0;
     color: rgb(250, 212, 106);
-    font-family: "Lobster", serif;
-    text-shadow: rgb(255, 51, 51, 1) 1px 0px 0px, rgb(255, 255, 255) 0.540302px 0.841471px 0px, rgb(255, 255, 255) -0.416147px 0.909297px 0px, rgb(255, 255, 255) -0.989992px 0.14112px 0px, rgb(255, 255, 255) -0.653644px -0.756802px 0px, rgb(255, 255, 255) 0.283662px -0.958924px 0px, rgb(255, 255, 255) 0.96017px -0.279415px 0px;
+    font-family: "casinoFont";
+    text-shadow: 0px 0px 5px red;
+    outline: 8px dotted rgb(255, 255, 255);
+    outline-offset: -15px;
+    box-shadow:
+        0 0 20px rgba(255, 255, 255, 0.8),
+        0 0 40px rgba(255, 255, 228, 0.8),
+        0 0 60px rgb(255, 255, 1);
 }
 
 
@@ -49,49 +64,49 @@ body {
 
 .grid-column2 {
     width: 100%;
+    margin-top: 15%;
 }
 
 .grid-column3 {}
 
-/*---------------------------  Popout Rules  -----------------------------*/
+/*--------------------------- Rules  -----------------------------*/
 
-.popup-container {
-    margin-top: 25px;
+.rules-container {
+    border-radius: 10px;
+    margin-top: 6%;
     position: absolute;
-    left: -240px;
-    width: 15%;
-    height: 80%;
-    background-color: grey;
-    transition: left 0.3s cubic-bezier(0.8, 0, 0.6, 1);
-    border-top-right-radius: 5%;
-    border-bottom-right-radius: 5%;
+    left: 1%;
+    width: 20%;
+    height: 10%;
+    color: black;
+    z-index: 999;
 }
 
-.popup-container:hover {
-    left: 0px;
-}
-
-.pullout-div {
+.hoverforcombos-p {
+    color: white;
     position: absolute;
-    background-color: grey;
-    top: 35%;
-    width: 40px;
-    height: 25%;
-    left: 245px;
-    border-radius: 10%;
+    top: 200%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3rem;
+    left: 50%;
+    z-index: -1;
+    font-family: "Bebas Neue";
+    -webkit-text-stroke: 1px #F8F8F8;
+    text-shadow: 0px 1px 4px #23430C;
 }
 
-.container2 {
-    text-align: center;
-    margin: 30px;
+.comboImg {
+    width: 100%;
+    height: 55vh;
+    border: 4px black solid;
+    border-radius: 20px;
+    opacity: 0%;
+    transition: opacity 0.5s ease-in-out;
 }
 
-.popuph1 {
-    font-size: 20px;
-}
-
-.popup-p {
-    font-size: 20px;
+.comboImg:hover {
+    opacity: 100%;
 }
 
 /*--------------------------- Alert -----------------------------*/
@@ -110,7 +125,7 @@ body {
     color: rgb(250, 212, 106);
     font-size: 5rem;
     -webkit-text-stroke: 1px rgba(255, 51, 51, 1);
-    font-family:"Bebas Neue";
+    font-family: "Bebas Neue";
     text-shadow: 0px 0px 15px rgba(255, 51, 51, 1);
     animation: shadowSwap 2s infinite alternate;
     display: none;
@@ -124,13 +139,19 @@ body {
     position: relative;
     width: 100%;
     height: 55vh;
-    background: rgb(255,255,255);
-    background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(145,145,145,1) 100%);
+    background: rgb(255, 255, 255);
+    background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(145, 145, 145, 1) 100%);
     border-radius: 20px;
-    margin-top: 25px;
     position: relative;
     align-items: center;
     justify-content: space-evenly;
+    border: 3px solid black;
+    outline: 8px dotted rgba(255, 255, 255, 1);
+    outline-offset: 2px;
+    box-shadow:
+        0 0 20px rgba(255, 255, 255, 0.8),
+        0 0 60px rgba(255, 255, 228, 0.8),
+        0 0 80px rgb(255, 255, 1);
 }
 
 .container {
@@ -249,33 +270,36 @@ body {
     gap: 10px;
 }
 
-.coins, .credits {
+.coins,
+.credits {
     font-family: 'Montserrat';
-    font-size: 1rem;
-    text-shadow: 1px 1px 3px black;
+    font-size: 1.2rem;
+    color: black;
 }
 
-.bet-container, .money-container {
+.bet-container,
+.money-container {
     background-color: black;
     border: 3px inset white;
     height: 100%;
     width: 100%;
     border-radius: 5px;
-    position: relative; /* Add position relative */
+    position: relative;
 }
 
 .bet-container {
     grid-row: 2;
 }
 
-.bet-display, .money-display {
+.bet-display,
+.money-display {
     font-family: 'Digital7', sans-serif;
     font-size: 2rem;
     margin: 0;
     position: absolute;
     left: 50%;
     top: 50%;
-    transform: translate(-50%, -50%); /* Combine transform properties */
+    transform: translate(-50%, -50%);
 }
 
 /*---------------------------  Ui / Buttons  -----------------------------*/
@@ -299,17 +323,48 @@ body {
 }
 
 .button {
-    height: 90%;
-    width: 50%;
+    color: black;
+    background-color: rgb(246, 101, 48);
+    height: 60%;
+    width: 40%;
     position: relative;
-    margin: 5px;
+    margin-right: 30px;
     border-radius: 30%;
     border-style: none;
-    box-shadow: inset 4px 2px 10px rgb(150, 148, 148), inset -5px -5px 10px rgb(0, 0, 0), 3px 2px 6px rgba(0, 0, 0, 0.5);
     font-family: "Montserrat";
     font-size: 1.5rem;
     font-weight: bold;
+    text-shadow: 1px 0 0 white, 1px 0 0 white, 1px 0 0 white, 1px 0 0 white;
+    box-shadow:
+        0px 2px 4px rgba(0, 0, 0, 0.8),
+        0px 7px 13px -3px rgba(0, 0, 0, 0.8),
+        inset 0px -3px 0px rgba(196, 81, 38, 1),
+        inset 5px 2px 8px rgba(255, 161, 130, 0.8),  
+        inset -2px -2px 4px rgba(196, 81, 38, 1);  
+    transition: transform 0.2s ease;
 }
+
+.button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: inherit;
+    box-shadow: 0 10px 0px 5px rgba(0, 0, 0, 1);
+    z-index: -1;
+    transition: transform 0.2s ease;
+}
+
+.button:active {
+    transform: scale(0.9);
+}
+
+.button:active::before {
+    transform: scale(1.111);
+}
+
 
 .button1 {
     grid-column: 1;
@@ -324,48 +379,107 @@ body {
 .button3 {
     grid-column: 1;
     grid-row: 3;
-}   
+}
 
-.button-class{
+.button-class {
     text-shadow: inset 3px 0px 2px rgba(255, 255, 255, 1);
 }
 
 .confirm-button-container {
+    display: flex;
     margin-left: 20px;
     margin-right: 20px;
     width: 30%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
 }
 
 .confirm-button {
-    width: 150px;
-    height: 150px;
+    background: rgb(255, 208, 90);
+    width: 60%;
+    height: 70%;
     border-radius: 50%;
     border-style: none;
-    transform: rotateX(2deg) rotateY(0deg);
-    transform-style: preserve-3d;
+    text-shadow: 1px 0 0 black, 1px 0 0 black, 1px 0 0 black, 1px 0 0 black;
+    box-shadow:
+        0px 2px 4px rgba(0, 0, 0, 0.4),
+        0px 7px 13px -3px rgba(0, 0, 0, 0.3),
+        inset 10px -1px 10px rgba(241, 236, 226, 0.275),
+        inset 2px 2px 4px rgb(241, 236, 226),
+        inset -2px -2px 4px rgb(0, 0, 0); 
+    color: white;
+    font-family: "Montserrat";
+    font-size: 2vw;
+    font-weight: bold;
+    position: relative;
+    transition: transform 0.2s ease;
+}
+
+.confirm-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: inherit;
+    box-shadow: 1px 10px 0px 5px rgba(0, 0, 0, 1);
+    z-index: -1;
+    transition: transform 0.2s ease;
+}
+
+.confirm-button:active {
+    transform: scale(0.9);
+}
+
+.confirm-button:active::before {
+    transform: scale(1.111);
 }
 
 .coin-slot {
-    background-color: black;
+    background-color: rgb(61, 61, 61);
     width: 5%;
     height: 150px;
     border-radius: 10px;
     position: relative;
+    box-shadow:
+        0px 2px 4px rgba(0, 0, 0, 0.4),
+        0px 7px 13px -3px rgba(0, 0, 0, 0.3),
+        inset 10px -1px 10px rgba(0, 0, 0, 0.2),
+        inset 2px 2px 4px rgba(0, 0, 0, 0.5),
+        inset -2px -2px 4px rgba(0, 0, 0, 0.2),
+        1px 10px 0 5px rgba(0, 0, 0, 1);
 }
 
 .coin-slit {
     background-color: grey;
     position: absolute;
     width: 5px;
-    height: 50px;
-    top: 50px;
+    height: 80px;
+    top: 35px;
     left: 47.9%;
     border-radius: 10%;
+    border: 1px white solid;
 }
 
+.coin {
+    display: none;
+    overflow: visible;
+    height: 50%;
+    width: 50%;
+    background-color: rgb(255, 208, 0); 
+    z-index: 3;
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
+    border-left: 5px solid rgb(204, 166, 0); 
+    animation: shrink 2s forwards;
+}
 /*---------------------------  Lever  -----------------------------*/
 
 .lever {
+    position: relative;
+    top: 200px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -377,7 +491,7 @@ body {
     position: absolute;
     height: 100px;
     width: 100px;
-    background-color: red;
+    background-color: rgb(246, 101, 48);
     border-radius: 50%;
     top: 75px;
     left: 50.7%;
@@ -444,7 +558,7 @@ body {
     position: absolute;
     height: 100px;
     width: 100px;
-    background-color: red;
+    background-color: rgb(246, 101, 48);
     border-radius: 50%;
     top: 330px;
     left: 70%;
@@ -499,6 +613,7 @@ body {
     0% {
         text-shadow: 0px 0px 15px rgba(255, 51, 51, 1);
     }
+
     100% {
         text-shadow: 0px 0px 15px rgb(250, 212, 106);
     }
@@ -509,16 +624,171 @@ body {
         text-shadow: rgb(255, 51, 51, 1) 1px 0px 0px, rgb(255, 255, 255) 0.540302px 0.841471px 0px, rgb(255, 255, 255) -0.416147px 0.909297px 0px, rgb(255, 255, 255) -0.989992px 0.14112px 0px, rgb(255, 255, 255) -0.653644px -0.756802px 0px, rgb(255, 255, 255) 0.283662px -0.958924px 0px, rgb(255, 255, 255) 0.96017px -0.279415px 0px;
         ;
     }
+
     100% {
         text-shadow: rgb(255, 255, 255) 1px 0px 0px, rgb(255, 255, 255) 0.540302px 0.841471px 0px, rgb(255, 255, 255) -0.416147px 0.909297px 0px, rgb(255, 255, 255) -0.989992px 0.14112px 0px, rgb(255, 255, 255) -0.653644px -0.756802px 0px, rgb(255, 255, 255) 0.283662px -0.958924px 0px, rgb(255, 255, 255) 0.96017px -0.279415px 0px;
         ;
     }
 }
 
+@keyframes flashCyan {
+    0%, 100% {
+        outline: 8px dotted rgba(0, 255, 255, 1);
+        outline-offset: 2px;
+        box-shadow:
+            0 0 20px rgba(0, 255, 255, 0.8),
+            0 0 60px rgba(0, 255, 255, 0.8),
+            0 0 80px rgb(0, 255, 255);
+    }
+    50% {
+        outline: 8px dotted rgba(255, 255, 255, 1);
+        outline-offset: 2px;
+        box-shadow:
+            0 0 20px rgba(255, 255, 255, 0.8),
+            0 0 60px rgba(255, 255, 228, 0.8),
+            0 0 80px rgb(255, 255, 1);
+    }
+}
+
+.flashCyan {
+    animation: flashCyan 0.4s infinite;
+}
+
+@keyframes flashcyanHeader {
+    0%, 100% {
+        outline: 8px dotted rgba(0, 255, 255, 1);
+        outline-offset: -15px;
+        box-shadow:
+            0 0 20px rgba(0, 255, 255, 0.8),
+            0 0 60px rgba(0, 255, 255, 0.8),
+            0 0 80px rgb(0, 255, 255);
+    }
+    50% {
+        outline: 8px dotted rgba(255, 255, 255, 1);
+        outline-offset: -15px;
+        box-shadow:
+            0 0 20px rgba(255, 255, 255, 0.8),
+            0 0 60px rgba(255, 255, 228, 0.8),
+            0 0 80px rgb(255, 255, 1);
+    }
+}
+
+.flashcyanHeader {
+    animation: flashcyanHeader 0.4s infinite;
+}
+
+@keyframes flashGreen {
+    0%, 100% {
+        outline: 8px dotted rgba(0, 255, 0, 1);
+        outline-offset: 2px;
+        box-shadow:
+            0 0 20px rgba(0, 255, 0, 0.8),
+            0 0 60px rgba(0, 255, 0, 0.8),
+            0 0 80px rgb(0, 255, 0);
+    }
+    50% {
+        outline: 8px dotted rgba(255, 255, 255, 1);
+        outline-offset: 2px;
+        box-shadow:
+            0 0 20px rgba(255, 255, 255, 0.8),
+            0 0 60px rgba(255, 255, 228, 0.8),
+            0 0 80px rgb(255, 255, 1);
+    }
+}
+
+.flashGreen {
+    animation: flashGreen .4s infinite;
+}
+
+@keyframes flashgreenHeader {
+    0%, 100% {
+        outline: 8px dotted rgba(0, 255, 0, 1);
+        outline-offset: -15px;
+        box-shadow:
+            0 0 20px rgba(0, 255, 0, 0.8),
+            0 0 60px rgba(0, 255, 0, 0.8),
+            0 0 80px rgb(0, 255, 0);
+    }
+    50% {
+        outline: 8px dotted rgba(255, 255, 255, 1);
+        outline-offset: -15px;
+        box-shadow:
+            0 0 20px rgba(255, 255, 255, 0.8),
+            0 0 60px rgba(255, 255, 228, 0.8),
+            0 0 80px rgb(255, 255, 1);
+    }
+}
+
+.flashgreenHeader{
+    animation: flashgreenHeader .4s infinite;
+}
+
+@keyframes flashyellowDouble {
+    0%, 100% {
+        outline: 8px dotted rgba(255, 208, 90, 1);
+        outline-offset: 2px;
+        box-shadow:
+            0 0 20px rgba(255, 208, 90, 0.8),
+            0 0 60px rgba(255, 208, 90, 0.8),
+            0 0 80px rgb(255, 208, 90);
+    }
+    50% {
+        outline: 8px dotted rgba(255, 255, 255, 1);
+        outline-offset: 2px;
+        box-shadow:
+            0 0 20px rgba(255, 255, 255, 0.8),
+            0 0 60px rgba(255, 255, 228, 0.8),
+            0 0 80px rgb(255, 255, 1);
+    }
+}
+
+.flashyellowDouble {
+    animation: flashyellowDouble 1s infinite;
+}
+
+@keyframes flashyellowdoubleHeader {
+    0%, 100% {
+        outline: 8px dotted rgba(255, 208, 90, 1);
+        outline-offset: -15px;
+        box-shadow:
+            0 0 20px rgba(255, 208, 90, 0.8),
+            0 0 60px rgba(255, 208, 90, 0.8),
+            0 0 80px rgb(255, 208, 90);
+    }
+    50% {
+        outline: 8px dotted rgba(255, 255, 255, 1);
+        outline-offset: -15px;
+        box-shadow:
+            0 0 20px rgba(255, 255, 255, 0.8),
+            0 0 60px rgba(255, 255, 228, 0.8),
+            0 0 80px rgb(255, 255, 1);
+    }
+}
+
+.flashyellowdoubleHeader {
+    animation: flashyellowdoubleHeader 1s infinite;
+}
+
+
+@keyframes shrink {
+    0% {
+        width: 50%;
+        margin-left: 0;
+    }
+    100% {
+        width: 0%;
+        margin-left: 50%;
+    }
+}
 /*---------------------------  Custom Fonts  -----------------------------*/
 
 @font-face {
     font-family: 'Digital7';
     src: url('../css/digital-7.ttf');
+}
+
+@font-face {
+    font-family: "casinoFont";
+    src: url("../css/budmo jiggler.otf");
 }
 

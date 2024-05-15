@@ -6,6 +6,9 @@ const betOneButton = document.getElementById("betOneButton");
 const betTwoButton = document.getElementById("betTwoButton");
 const betThreeButton = document.getElementById("betThreeButton");
 
+const coin = document.getElementById("coin")
+const headerBulbs = document.getElementById("title")
+const slotMachine = document.getElementById("slot-machine")
 const betDisplay = document.getElementById("bet-display");
 betDisplay.innerText = `${betAmount}`;
 const moneyDisplay = document.getElementById("money-display");
@@ -17,12 +20,12 @@ slotButton.disabled = true;
 const lever = document.getElementById("lever");
 lever.style.pointerEvents = "none";
 const customAlert = document.getElementById("alert-p");
-function customAlertOn(text){
+function customAlertOn(text) {
     customAlert.style.display = "block";
     customAlert.innerText = `${text}`
-    customAlert.style.backgroundColor = rgba(0,0,0,0.4);
+    customAlert.style.backgroundColor = "rgba(0, 0, 0, 0.4)";
 }
-function customAlertOff(){
+function customAlertOff() {
     customAlert.style.display = "none";
 }
 function pauseButtons() {
@@ -49,17 +52,19 @@ function gameLost() {
 }
 function gameWon() {
     if (currentMoney >= 500) {
+        customAlertOn("Congratulations! You've won!");
+        slotMachine.classList.add("flashGreen");
+        headerBulbs.classList.add("flashgreenHeader");
+        console.log("Before setTimeout");
 
-        // have an alert to tell the player they won with animations
-        // Maybe have a prompt asking if they want to continue and see if they can get as much money as possible
-        /* if (playerChoice = no){
-            setTimout(() => {
-                location.Reload
-            }2000)
-        } else{
-            alert "good luck"
-        }
-        */
+        setTimeout(() => {
+            console.log("Inside setTimeout before class removal");
+            slotMachine.classList.remove("flashGreen");
+            headerBulbs.classList.remove("flashgreenHeader");
+            console.log("Inside setTimeout after class removal");
+            location.reload();
+            console.log("Page should reload now");
+        }, 5000);
     }
 }
 function updateButtons() {
@@ -77,9 +82,7 @@ function updateBetAmount(amount) {
         betAmount += amount;
         betDisplay.innerText = betAmount;
         updateButtons();
-    } else if (betAmount += amount > currentMoney) {
-        // make nice alert to tell them not enough!
-    }
+    } 
 }
 
 betOneButton.addEventListener("click", function () {
@@ -106,11 +109,13 @@ confirmButton.addEventListener("click", function () {
 slotButton.addEventListener("click", function () {
     lever.style.pointerEvents = "auto";
     slotButton.disabled = true;
+    coin.style.display = "block";
 })
 
 lever.addEventListener("click", function () {
     document.getElementById("lever").style.display = "none";
     document.getElementById("pulledlever").style.display = "flex";
+    coin.style.display = "none"
 
     setInterval(() => {
         document.getElementById("lever").style.display = "flex";
@@ -132,9 +137,14 @@ const columnArrays = [
     ["🍎", "🍇", "🍒", "💎", "🍉", "🌶️"]
 
     //        To test jackpot 
-    // ["💎","💎","💎","💎","💎","💎"],
-    // ["💎","💎","💎","💎","💎","💎"],
-    // ["💎","💎","💎","💎","💎","💎"]
+    // ["💎", "💎", "💎", "💎", "💎", "💎"],
+    // ["💎", "💎", "💎", "💎", "💎", "💎"],
+    // ["💎", "💎", "💎", "💎", "💎", "💎"]
+
+    //        To test 3 matching
+    // ["🌶️", "🌶️", "🌶️", "🌶️", "🌶️", "🌶️"],
+    // ["🌶️", "🌶️", "🌶️", "🌶️", "🌶️", "🌶️"],
+    // ["🌶️", "🌶️", "🌶️", "🌶️", "🌶️", "🌶️"]
 ];
 
 const multipliers = {
@@ -184,7 +194,7 @@ function spin() {
             const currentIndex = Math.floor(Math.random() * columnArrays[index].length);
             column[0].classList.remove('move-down-top');
             column[1].classList.remove('move-down-middle');
-            column[2].classList.remove('move-down-bottom');          
+            column[2].classList.remove('move-down-bottom');
             column[1].innerText = columnArrays[index][currentIndex];
             results[index] = columnArrays[index][currentIndex];
             column[0].innerText = columnArrays[index][(currentIndex - 1 + columnArrays[index].length) % columnArrays[index].length];
@@ -209,18 +219,48 @@ function spin() {
                 multiplierValue = multipliers[matchedEmoji];
                 currentMoney += (betAmount * multiplierValue) * 4;
                 moneyDisplay.innerText = `${currentMoney}`;
+                slotMachine.classList.add("flashCyan");
+                headerBulbs.classList.add("flashcyanHeader");
+                setTimeout(() => {
+                    slotMachine.classList.remove("flashCyan");
+                    headerBulbs.classList.remove("flashcyanHeader");
+                }, 4000);
             } else {
                 matchedEmoji = results[0];
                 multiplierValue = multipliers[matchedEmoji];
                 currentMoney += (betAmount * multiplierValue) * 2;
                 moneyDisplay.innerText = `${currentMoney}`;
+                slotMachine.classList.add("flashGreen");
+                headerBulbs.classList.add("flashgreenHeader");
+                setTimeout(() => {
+                    slotMachine.classList.remove("flashGreen");
+                    headerBulbs.classList.remove("flashgreenHeader");
+                }, 2000);
             }
         } else if (results[0] === results[1]) {
             handleMatchingResults(0);
+            slotMachine.classList.add("flashyellowDouble");
+            headerBulbs.classList.add("flashyellowdoubleHeader");
+            setTimeout(() => {
+                slotMachine.classList.remove("flashyellowDouble");
+                headerBulbs.classList.remove("flashyellowdoubleHeader");
+            }, 4000);
         } else if (results[0] === results[2]) {
             handleMatchingResults(0);
+            slotMachine.classList.add("flashyellowDouble");
+            headerBulbs.classList.add("flashyellowdoubleHeader");
+            setTimeout(() => {
+                slotMachine.classList.remove("flashyellowDouble");
+                headerBulbs.classList.remove("flashyellowdoubleHeader");
+            }, 4000);
         } else if (results[1] === results[2]) {
             handleMatchingResults(1);
+            slotMachine.classList.add("flashyellowDouble");
+            headerBulbs.classList.add("flashyellowdoubleHeader");
+            setTimeout(() => {
+                slotMachine.classList.remove("flashyellowDouble");
+                headerBulbs.classList.remove("flashyellowdoubleHeader");
+            }, 4000);
         }
 
         if (matchedEmoji) {
