@@ -337,7 +337,7 @@ body {
         inset 0px -3px 0px rgb(0, 0, 0),
         inset 5px 2px 8px rgba(255, 255, 255, 0.8),
         inset -2px -2px 4px rgb(0, 0, 0);
-        transition: transform 0.2s ease;
+    transition: transform 0.2s ease;
 }
 
 .button::before {
