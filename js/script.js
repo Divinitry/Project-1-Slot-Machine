@@ -82,7 +82,7 @@ function updateBetAmount(amount) {
         betAmount += amount;
         betDisplay.innerText = betAmount;
         updateButtons();
-    } 
+    }
 }
 
 betOneButton.addEventListener("click", function () {
